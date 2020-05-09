@@ -2,7 +2,7 @@ import random
 from scipy.stats import f, t
 from prettytable import PrettyTable
 import numpy as np
-
+import time
 
 x1_min = -5
 x1_max = 15
@@ -19,6 +19,8 @@ deltax2 = x2_max - x02
 deltax3 = x3_max - x03
 
 m = 3
+
+t0 = time.time()
 
 X11 = [-1, -1, -1, -1, 1, 1, 1, 1, -1.73, 1.73, 0, 0, 0, 0, 0]
 X22 = [-1, -1, 1, 1, -1, -1, 1, 1, 0, 0, -1.73, 1.73, 0, 0, 0]
@@ -44,6 +46,7 @@ def kv(x):
     for i in range(len(x)):
         xn.append(round(x[i] * x[i], 3))
     return xn
+
 
 
 X12 = sumkf2(X11, X22)
@@ -265,3 +268,7 @@ if Gp < Gt:
 
 else:
     print("Дисперсія  неоднорідна, збільшіть m")
+
+time = time.time() - t0
+
+print("Час виконання = ", time, "секунди")
